@@ -1,0 +1,13 @@
+{
+    "public_ip": "0.0.0.0",
+    "public_port": 13100,
+    "local_ip": "0.0.0.0",
+    "local_port": 12100,
+    "database": {
+        "address": "127.0.0.1",
+        "port": 3306,
+        "user": "root",
+        "password": "password",
+        "database": "rxjh_login"
+    }
+}

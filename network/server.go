@@ -1,6 +1,7 @@
 package network
 
 import (
+	"fmt"
 	"log"
 
 	"github.com/DarthPestilane/easytcp"
@@ -20,9 +21,9 @@ func NewListener() *Server {
 	}
 }
 
-func (s *Server) Run() {
-	log.Println("Start network server port: 13100")
-	if err := s.listener.Run(":13100"); err != nil {
+func (s *Server) Run(port int) {
+	log.Printf("Start network server port: %d", port)
+	if err := s.listener.Run(fmt.Sprintf(":%d", port)); err != nil {
 		log.Fatalf("serve err: %s", err)
 	}
 }

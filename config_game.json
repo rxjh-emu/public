@@ -1,0 +1,36 @@
+{
+    "server_id": 1,
+    "server_name": "TEST",
+    "login_ip": "127.0.0.1",
+    "login_port": 12100,
+    "server_ip": "0.0.0.0",
+
+    "database": {
+        "address": "127.0.0.1",
+        "port": "3306",
+        "user": "root",
+        "password": "password",
+        "database": "rxjh_login"
+    },
+
+    "channels": [
+        {
+            "channel_id": 1,
+            "channel_name": "TEST 01",
+            "exp_rate": 1.0,
+            "drop_rate": 1.0,
+            "money_rate": 1.0,
+            "port": 16101,
+            "max_player": 100
+        },
+        {
+            "channel_id": 2,
+            "channel_name": "TEST 02",
+            "exp_rate": 1.0,
+            "drop_rate": 1.0,
+            "money_rate": 1.0,
+            "port": 16101,
+            "max_player": 100
+        }
+    ]
+}
