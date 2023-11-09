@@ -1,11 +1,11 @@
 # RXJH-EMU PUBLIC VERSION
-RXJH Emulator Public Project, Go lang server emulator of RXJH game
-Development on client from [steam (scion of fate)](https://store.steampowered.com/app/747970/Scions_of_Fate/)
-
+RXJH Emulator Public Project, Go lang server emulator of RXJH game<br />
+Development on client from steam (scion of fate)<br />
+<br />
 Libraries usage:
  - [easytcp](https://github.com/DarthPestilane/easytcp)
  - [Gorm](https://gorm.io/)
- 
+ <br />
 # Usage
 
 dev run:
