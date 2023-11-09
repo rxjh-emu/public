@@ -19,9 +19,9 @@ func main() {
 	case "login":
 		s := server.NewLoginServer()
 		s.Start()
-	// case "game":
-	// 	s := server.NewGameServer()
-	// 	s.Start()
+	case "game":
+		s := server.NewGameServer()
+		s.Start()
 	default:
 		if *typePtr != "" {
 			log.Fatalf("Unkown server type: %s", *typePtr)
