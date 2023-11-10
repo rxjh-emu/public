@@ -3,7 +3,6 @@ package server
 import (
 	"log"
 	"rxjh-emu/public/config"
-	"rxjh-emu/public/network"
 	"sync"
 )
 
@@ -24,12 +23,12 @@ func NewGameServer() *gameServer {
 }
 
 func (gs *gameServer) initChannels() {
-	for _, chn := range gs.config.Channels {
-		gs.wg.Add(1)
-		s := network.NewListener()
-		// TODO add channel[easytcp] route list & middleware
-		go s.Run(chn.Port)
-	}
+	// for _, chn := range gs.config.Channels {
+	// 	gs.wg.Add(1)
+	// 	s := network.NewListener()
+	// 	// TODO add channel[easytcp] route list & middleware
+	// 	go s.Run(chn.Port)
+	// }
 }
 
 func (gs *gameServer) Start() {

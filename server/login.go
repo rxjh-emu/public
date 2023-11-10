@@ -4,22 +4,32 @@ import (
 	"log"
 	"rxjh-emu/public/config"
 	"rxjh-emu/public/network"
+	"rxjh-emu/public/network/packer"
+	localRoutes "rxjh-emu/public/network/routes/local"
+	"rxjh-emu/public/utils/consts/opcodes"
 	"sync"
+
+	"github.com/DarthPestilane/easytcp"
 )
 
 type loginServer struct {
-	config    config.ConfigLogin
-	netPublic network.Listener
-	netLocal  network.Listener
+	config   config.ConfigLogin
+	netLocal network.Listener
+
+	localRoutes map[uint16]network.RouteInfo
 
 	wg *sync.WaitGroup
 }
 
 func NewLoginServer() *loginServer {
 	return &loginServer{
-		config:    config.LoadLoginConfig(),
-		netPublic: *network.NewListener(),
-		netLocal:  *network.NewListener(),
+		config: config.LoadLoginConfig(),
+		netLocal: *network.NewListener(
+			&packer.LocalPacker{},
+			&easytcp.JsonCodec{},
+		),
+
+		localRoutes: make(map[uint16]network.RouteInfo),
 
 		wg: &sync.WaitGroup{},
 	}
@@ -28,13 +38,18 @@ func NewLoginServer() *loginServer {
 func (ls *loginServer) Start() {
 	log.Println("Start LoginServer")
 
+	ls.initRoutes()
+
 	ls.wg.Add(1)
 	// TODO add netLocal[easytcp] route list & middleware
 	go ls.netLocal.Run(ls.config.LocalPort)
 
-	ls.wg.Add(1)
-	// TODO add netPublic[easytcp] route list & middleware
-	go ls.netPublic.Run(ls.config.PublicPort)
-
 	ls.wg.Wait()
+}
+
+func (ls *loginServer) initRoutes() {
+	// LOCAL ROUTES
+	ls.localRoutes[opcodes.L_REQ_PING] = &localRoutes.L_REQ_PING{}
+
+	// CLIENT ROUTES
 }

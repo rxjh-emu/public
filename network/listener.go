@@ -11,11 +11,11 @@ type Listener struct {
 	tcp *easytcp.Server
 }
 
-func NewListener() *Listener {
+func NewListener(packer easytcp.Packer, codec easytcp.Codec) *Listener {
 	return &Listener{
 		tcp: easytcp.NewServer(&easytcp.ServerOption{
-			Packer:           easytcp.NewDefaultPacker(),
-			Codec:            nil,
+			Packer:           packer,
+			Codec:            codec,
 			DoNotPrintRoutes: true,
 		}),
 	}
