@@ -42,6 +42,7 @@ func (ls *loginServer) Start() {
 
 	ls.wg.Add(1)
 	// TODO add netLocal[easytcp] route list & middleware
+	ls.netLocal.RegisterRoutes(ls.localRoutes)
 	go ls.netLocal.Run(ls.config.LocalPort)
 
 	ls.wg.Wait()

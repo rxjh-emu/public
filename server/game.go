@@ -3,11 +3,17 @@ package server
 import (
 	"log"
 	"rxjh-emu/public/config"
+	"rxjh-emu/public/network"
+	"rxjh-emu/public/network/packer"
 	"sync"
+
+	"github.com/DarthPestilane/easytcp"
 )
 
 type gameServer struct {
 	config config.ConfigGame
+
+	localClient *network.TCPClient
 
 	wg *sync.WaitGroup
 }
@@ -35,6 +41,14 @@ func (gs *gameServer) Start() {
 	log.Println("Start GameServer")
 
 	gs.initChannels()
+
+	gs.wg.Add(1)
+	cli := network.NewTCPClient(
+		&packer.LocalPacker{},
+		&easytcp.JsonCodec{},
+	)
+	gs.localClient = cli
+	gs.localClient.Start()
 
 	gs.wg.Wait()
 }
