@@ -23,14 +23,6 @@ func NewListener(packer easytcp.Packer, codec easytcp.Codec) *Listener {
 
 func (l *Listener) Run(port int) {
 	log.Printf("Start network server port: %d", port)
-
-	l.tcp.OnSessionCreate = func(sess easytcp.Session) {
-		log.Printf("session created: %v", sess.ID())
-	}
-	l.tcp.OnSessionClose = func(sess easytcp.Session) {
-		log.Printf("session closed: %v", sess.ID())
-	}
-
 	if err := l.tcp.Run(fmt.Sprintf(":%d", port)); err != nil {
 		log.Fatalf("serve err: %s", err)
 	}

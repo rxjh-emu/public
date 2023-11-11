@@ -51,6 +51,7 @@ func (ls *loginServer) Start() {
 func (ls *loginServer) initRoutes() {
 	// LOCAL ROUTES
 	ls.localRoutes[opcodes.L_REQ_PING] = &localRoutes.L_REQ_PING{}
+	ls.localRoutes[opcodes.L_REQ_SERVER_REGISTER] = &localRoutes.L_REQ_SERVER_REGISTER{}
 
 	// CLIENT ROUTES
 }
